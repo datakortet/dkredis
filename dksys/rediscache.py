@@ -19,7 +19,7 @@ def _cache_unserialize(val):
 class cache(object):
     """Usage::
 
-         from datakortet.core.rediscache import cache
+         from dksys.rediscache import cache
 
          try:
              v = cache.get(key)
