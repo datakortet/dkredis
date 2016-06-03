@@ -27,7 +27,7 @@ class cache(object):
              v = mk_object_value(...)
              cache.put(
                  key, v,
-                 duration='+2hrs')
+                 duration=secs)  # or datetime.duration()
 
           you can use a datetime value for the valid_until parameter,
           or anything the timeperiod.when() function accepts.
