@@ -44,6 +44,11 @@ class cache(object):
         return "obj-cache." + hashlib.md5(k).hexdigest()
 
     @classmethod
+    def ping(cls):
+        r = dkredis.connect()
+        r.ping()
+
+    @classmethod
     def remove(cls, key):
         "Remove key from cache."
         r = dkredis.connect()
