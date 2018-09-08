@@ -72,3 +72,7 @@ docs/_build/
 target/
 *.py~
 *.rst~
+.idea/inspectionProfiles/
+.idea/markdown-navigator/
+.idea/modules.xml
+.idea/vagrant.xml
