@@ -2,7 +2,7 @@
 
 """Fast tests of dkredis (no timeout tests).
 """
-from dksys import dkredis
+import dkredis
 import pytest
 
 

@@ -5,7 +5,7 @@
 # pylint:disable=R0904
 # R0904: Too many public methods
 import pytest
-from dksys import dkredis
+import dkredis
 import time
 
 
