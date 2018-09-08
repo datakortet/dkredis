@@ -1,6 +1,6 @@
 
-.. image:: https://travis-ci.org/thebjorn/dkredis.svg?branch=master
-    :target: https://travis-ci.org/thebjorn/dkredis
+.. image:: https://travis-ci.org/datakortet/dkredis.svg?branch=master
+    :target: https://travis-ci.org/datakortet/dkredis
 
 
 dkredis -- short description
