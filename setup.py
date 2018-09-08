@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""dkredis - short description
+"""dkredis - Python interface to Redis
 """
 
 classifiers = """\
@@ -19,7 +19,7 @@ import setuptools
 from distutils.core import setup, Command
 from setuptools.command.test import test as TestCommand
 
-version = '0.1.0'
+version = '0.0.2'
 
 
 class PyTest(TestCommand):

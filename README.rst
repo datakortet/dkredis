@@ -1,9 +1,9 @@
 
-.. image:: https://travis-ci.org/datakortet/dkredis.svg?branch=master
-    :target: https://travis-ci.org/datakortet/dkredis
+.. image:: https://coveralls.io/repos/github/datakortet/dkredis/badge.svg?branch=master
+    :target: https://coveralls.io/github/datakortet/dkredis?branch=master
 
 
-dkredis -- short description
+dkredis - Python interface to Redis
 ==================================================
 
 

@@ -2,3 +2,9 @@ redis==2.10.3
 
 pytest
 pytest-cov
+
+
+# for publishing
+# dkfileutils
+# invoke
+# dk-tasklib
