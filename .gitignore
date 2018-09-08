@@ -26,7 +26,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
-#build/
+build/
 develop-eggs/
 dist/
 downloads/
@@ -72,8 +72,11 @@ docs/_build/
 target/
 *.py~
 *.rst~
+
+.md5
 .idea/inspectionProfiles/
 .idea/markdown-navigator/
+.idea/markdown-navigator.xml
 .idea/modules.xml
 .idea/vagrant.xml
 /.pytest_cache/
