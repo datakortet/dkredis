@@ -16,7 +16,7 @@ def test_mhkeyget(cn):
     assert cn.hmset('lock.a', {'x': 1})
     assert cn.hmset('lock.b', {'x': 2})
     assert cn.hmset('lock.c', {'x': 3})
-    all_locks = {'lock.a': '1', 'lock.c': '3', 'lock.b': '2'}
+    all_locks = {b'lock.a': b'1', b'lock.c': b'3', b'lock.b': b'2'}
     assert dkredis.mhkeyget('lock.*', 'x') == all_locks
     assert cn.delete('lock.a', 'lock.b', 'lock.c')
 
@@ -24,18 +24,18 @@ def test_mhkeyget(cn):
 def test_update(cn):
     cn.set('testupdate', 42)
     assert dkredis.update('testupdate', lambda x: int(x)+42, cn=cn) == 84
-    assert cn.get('testupdate') == '84'
+    assert cn.get('testupdate') == b'84'
     cn.delete('testupdate')
 
 
 def test_setmax(cn):
-    cn.set('testsetmax', 'hello')
-    assert dkredis.setmax('testsetmax', 'world', cn=cn) == 'world'
+    cn.set('testsetmax', b'hello')
+    assert dkredis.setmax('testsetmax', b'world', cn=cn) == b'world'
 
 
 def test_setmin(cn):
-    cn.set('testsetmax', 'hello')
-    assert dkredis.setmin('testsetmax', 'world', cn=cn) == 'hello'
+    cn.set('testsetmax', b'hello')
+    assert dkredis.setmin('testsetmax', b'world', cn=cn) == b'hello'
 
 
 def test_pyval():
@@ -52,4 +52,4 @@ def test_pop_pyval(cn):
 
 def test_dict(cn):
     dkredis.set_dict('testdict', dict(hello='world'), secs=5, cn=cn)
-    assert dkredis.get_dict('testdict', cn=cn) == {'hello': 'world'}
+    assert dkredis.get_dict('testdict', cn=cn) == {b'hello': b'world'}
