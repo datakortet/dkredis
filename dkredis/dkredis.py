@@ -22,21 +22,117 @@
 import pickle
 
 import time
-import redis
+
+import redis as _redis
 from contextlib import contextmanager
 
 
 class Timeout(Exception):  # pragma: nocover
-    "A timout limit was exceeded."
+    """A timout limit was exceeded.
+    """
 
     def __init__(self, retry=0):
         super(Timeout, self).__init__()
         self.retry = retry
 
 
+# class Redis(object):
+#     def __init__(self, host='localhost', port=6379, db=0, cn=None):
+#         self.host = host
+#         self.port = port
+#         self.db = db
+#         self._cn = cn
+#
+#     def _get_connection(self):
+#         """Return a connection to the redis server.
+#         """
+#         if not self._cn:
+#             self._cn = _redis.StrictRedis(
+#                 host=self.host,
+#                 port=self.port,
+#                 db=self.db
+#             )
+#         return self._cn
+#
+#     @property
+#     def cn(self):
+#         return self._get_connection()
+#
+#
+# class DurationMixin(object):
+#     """Mixin class to set the duration of key lifetimes.
+#     """
+#
+#
+# class JsonRedis(Redis):
+#     """Redis class that stores and retrieves values serialized as json.
+#     """
+#
+#     def __getitem__(self, item):
+#         pass
+#
+#     def set_pyval(key, val, secs=None, cn=None):
+#         """Store any (picleable) value in Redis.
+#         """
+#         r = self.cn
+#         pval = pickle.dumps(val)
+#         if secs is None:
+#             r.set(key, pval)
+#         else:
+#             r.setex(key, secs, pval)
+#
+#     def get_pyval(key, cn=None, missing_value=None):
+#         """Get a Python value from Redis.
+#         """
+#         r = cn or connect()
+#         val = r.get(key)
+#         if val is None:  # pragma: nocover
+#             return missing_value  # value if key is missing
+#         # print "dkredis:get_pyval:VAL:%s:" % val
+#         return pickle.loads(val)
+#
+#     def pop_pyval(key, cn=None):
+#         """Get value and remove key.
+#         """
+#         r = cn or connect()
+#         val = get_pyval(key, cn=r)
+#         r.delete(key)
+#         # with r.pipeline() as p:
+#         #     val = get_pyval(key, p)  # can't get a val in the middle of a pipeline
+#         #     p.delete(key)
+#         #     p.execute()
+#         return val
+#
+#     def update(self, key, fn):
+#         """Atomic update of ``key`` with result of ``fn``.
+#
+#            Usage::
+#
+#                r = Redis()
+#                r.set('foo', 40)
+#                r.update('foo', lambda val: val + 2)
+#                r.get('foo')   # ==> 42
+#
+#         """
+#         with self.cn.pipeline() as p:
+#             while 1:
+#                 try:
+#                     p.watch(key)  # --> immediate mode
+#                     val = p.get(key)
+#                     p.multi()  # --> back to buffered mode
+#                     newval = fn(val)
+#                     p.set(key, newval)
+#                     p.execute()  # raises WatchError if anyone has changed `key`
+#                     break  # success, break out of while loop
+#                 except _redis.WatchError:  # pragma: nocover
+#                     pass  # someone else got there before us, retry.
+#         return newval
+
+
 def connect(host='localhost', port=6379, db=0):
-    "Return a connection to the redis server."
-    return redis.StrictRedis(host=host, port=port, db=db)
+    """Return a connection to the redis server.
+    """
+    return _redis.StrictRedis(host=host, port=port, db=db)
 
 
 # def update_binop(binaryfn):
@@ -95,7 +191,7 @@ def update(key, fn, cn=None):
                 p.set(key, newval)
                 p.execute()  # raises WatchError if anyone has changed `key`
                 break  # success, break out of while loop
-            except redis.WatchError:  # pragma: nocover
+            except _redis.WatchError:  # pragma: nocover
                 pass  # someone else got there before us, retry.
     return newval
 
@@ -120,13 +216,16 @@ def setmin(key, val, cn=None):
     return update(key, lambda v: min(v, val), cn=cn)
 
 
-def later(n=0):
+def later(n=0.0):
     """Return timestamp ``n`` seconds from now.
     """
     return time.time() + n
 
 
-now = later  # with default value
+def now():
+    """Return timestamp.
+    """
+    return later(0)
 
 
 def set_pyval(key, val, secs=None, cn=None):
@@ -175,7 +274,8 @@ def set_dict(key, dictval, secs=None, cn=None):
 
 
 def get_dict(key, cn=None):
-    "Return a redis hash as a python dict."
+    """Return a redis hash as a python dict.
+    """
     r = cn or connect()
     res = {}
     for fieldname in r.hkeys(key):
