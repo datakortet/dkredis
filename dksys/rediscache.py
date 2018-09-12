@@ -5,7 +5,7 @@
 
 import pickle
 import hashlib
-from dksys import dkredis
+from dkredis import dkredis
 
 
 def _cache_serialize(val):
