@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-
 """Object cache implementation using redis as a backend.
 """
-
+from __future__ import absolute_import
 import pickle
 import hashlib
 from dkredis import dkredis
