@@ -19,7 +19,7 @@ import setuptools
 from distutils.core import setup, Command
 from setuptools.command.test import test as TestCommand
 
-version = '0.0.4'
+version = '0.0.5'
 
 
 class PyTest(TestCommand):
@@ -47,7 +47,9 @@ setup(
     requires=[
         'redis'
     ],
-    install_requires=[],
+    install_requires=[
+        'redis',
+    ],
     description=__doc__.strip(),
     classifiers=[line for line in classifiers.split('\n') if line],
     long_description=open('README.rst').read(),
