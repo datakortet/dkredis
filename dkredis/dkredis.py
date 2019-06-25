@@ -19,10 +19,9 @@
    from https://github.com/rgl/redis/downloads
    ----
 """
+import os
 import pickle
-
 import time
-
 import redis as _redis
 from contextlib import contextmanager
 
