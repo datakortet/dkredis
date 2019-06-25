@@ -132,7 +132,7 @@ def connect(host=None, port=6379, db=0):
     """Return a connection to the redis server.
     """
     if host is None:
-        host = os.envion.get('REDIS_HOST', 'localhost')
+        host = os.environ.get('REDIS_HOST', 'localhost')
     return _redis.StrictRedis(host=host, port=port, db=db)
 
 
