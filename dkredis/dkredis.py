@@ -129,9 +129,11 @@ class Timeout(Exception):  # pragma: nocover
 #         return newval
 
 
-def connect(host='localhost', port=6379, db=0):
+def connect(host=None, port=6379, db=0):
     """Return a connection to the redis server.
     """
+    if host is None:
+        host = os.envion.get('REDIS_HOST', 'localhost')
     return _redis.StrictRedis(host=host, port=port, db=db)
 
 
