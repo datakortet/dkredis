@@ -128,12 +128,14 @@ class Timeout(Exception):  # pragma: nocover
 #         return newval
 
 
-def connect(host=None, port=6379, db=0):
+def connect(host=None, port=6379, db=0, password=None):
     """Return a connection to the redis server.
     """
     if host is None:
         host = os.environ.get('REDIS_HOST', 'localhost')
-    return _redis.StrictRedis(host=host, port=port, db=db)
+    if password is None:
+        password = os.environ.get('REDIS_PASSWORD')
+    return _redis.StrictRedis(host=host, port=port, db=db, password=password)
 
 
 # def update_binop(binaryfn):
