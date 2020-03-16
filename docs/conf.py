@@ -231,7 +231,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'dkredis', u'dkredis Documentation',
-   u'', 'dkredis', 'One line description of project.',
+   u'', 'dkredis', 'Python interface to Redis',
    'Miscellaneous'),
 ]
 
