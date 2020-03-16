@@ -8,24 +8,17 @@ py27:
   script:
     - dk testpackage --ci --django=1.7.11 --tag=py27-dj17
 
-py3:
-  stage: test
+py35dj18:
+  extends: .testpackage
   image: thebjorn/dktestpackage3:latest
-  before_script:
-    - python -V
-    - pip -V
+  after_script: []
   script:
-    - dk testpackage --ci --tag=py3
-    - bash <(curl -s https://codecov.io/bash)
-  allow_failure: true
-  artifacts:
-    paths:
-      - build/*
+    - dk testpackage --ci --django=1.8.19 --tag=py35-dj18
 
 coverage:
   dependencies:
     - py27
-    - py3
+    # - py3
 
 wheel:
   dependencies:
