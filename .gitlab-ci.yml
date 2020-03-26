@@ -6,19 +6,18 @@ include:
 py27:
   extends: .testpackage
   script:
-    - dk testpackage --ci --django=1.7.11 --tag=py27-dj17
+    - dk testpackage --ci --tag=py27
 
-py35dj18:
+py35:
   extends: .testpackage
   image: thebjorn/dktestpackage3:latest
-  after_script: []
+  after_script: []      
   script:
-    - dk testpackage --ci --django=1.8.19 --tag=py35-dj18
+    - dk testpackage --ci --tag=py35
 
 coverage:
   dependencies:
     - py27
-    # - py3
 
 wheel:
   dependencies:
