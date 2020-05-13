@@ -4,7 +4,7 @@
 from __future__ import absolute_import
 import pickle
 import hashlib
-from dkredis import dkredis
+from . import dkredis
 
 
 def _cache_serialize(val):
@@ -18,7 +18,7 @@ def _cache_unserialize(val):
 class cache(object):
     """Usage::
 
-         from dksys.rediscache import cache
+         from dkredis.rediscache import cache
 
          try:
              v = cache.get(key)
@@ -60,7 +60,7 @@ class cache(object):
             _duration = 30 * 60  # 30 minutes
         elif hasattr(duration, 'to_int'):
             # ttcal.Duration
-            _duration = duration.to_int()
+            _duration = duration.to_int()   # pragma: nocover
         elif hasattr(duration, 'days') and hasattr(duration, 'seconds'):
             # datetime.timedelta
             _duration = duration.days * 24 * 60 * 60 + duration.seconds
@@ -74,7 +74,6 @@ class cache(object):
         v = _cache_serialize(value)
 
         r = dkredis.connect()
-        #print k, repr(v), _duration
         r.setex(k, _duration, v)
 
     @classmethod
@@ -182,21 +181,3 @@ def cached(cache_key=None, timeout=3600):
                 return data
         return do_cache
     return _cached
-
-
-def test_unit():
-    "cache unit tests."
-    # pylint:disable=W0212
-    import time
-
-    cache.put('foo', 42, 1)
-    assert cache.get('foo') == 42
-
-    cache.remove('bar')  # remove non-existing key.
-    
-    time.sleep(1.6)
-    assert cache._raw_get('foo') is None
-
-    cache.put('foo', 42)
-    cache.remove('foo')
-    assert cache._raw_get('foo') is None
