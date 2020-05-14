@@ -6,7 +6,7 @@
 
    Usage::
 
-       from dksys import dkredis
+       from dkredis import dkredis
        r = dkredis.connect()
        r.set('foo', 'bar')
        r.get('foo')
@@ -353,7 +353,7 @@ def mutex(name, seconds=30, timeout=60, unlock=True, waitsecs=3):
 
        Usage::
 
-           from dksys import dkredis
+           from dkredis import dkredis
 
            with dkredis.lock('mymutex'):
                # mutual exclusion zone ;-)
