@@ -4,15 +4,24 @@
 from __future__ import absolute_import
 import pickle
 import hashlib
+import zlib
+import base64
 from . import dkredis
 
 
+PICLE_PROTOCOL = 0
+
+
 def _cache_serialize(val):
-    return pickle.dumps(val).encode('zip').encode('base64')
+    """Serialize a python value to go into the cache.
+    """
+    return base64.b64encode(zlib.compress(pickle.dumps(val,protocol=PICLE_PROTOCOL)))
 
 
 def _cache_unserialize(val):
-    return pickle.loads(val.decode('base64').decode('zip'))
+    """Unserialize a python value from the cache.
+    """
+    return pickle.loads(zlib.decompress(base64.b64decode(val)))
 
 
 class cache(object):
@@ -168,10 +177,11 @@ def cached(cache_key=None, timeout=3600):
                 key = cache_key(*args, **kws)
             else:
                 key = hashlib.sha1(
-                    str(func.__module__)
+                    (str(func.__module__)
                     + str(func.__name__)
                     + str(args)
-                    + str(kws)).hexdigest()
+                    + str(kws)).encode('ascii')
+                ).hexdigest()
             # key = "FNCACHED-" + key
             try:
                 return cache.get(key)
