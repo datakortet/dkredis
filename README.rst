@@ -17,5 +17,3 @@ dkredis - Python interface to Redis
 .. image:: https://codecov.io/gl/norsktest/dkredis/branch/master/graph/badge.svg?token=2QOZN0V09V
   :target: https://codecov.io/gl/norsktest/dkredis
 
-.. include:: badge-wheel.rst
-

@@ -178,9 +178,10 @@ def connect(host=None, port=6379, db=0, password=None):
 
 
 def update(key, fn, cn=None):
-    """Usage::
-
-           update(KEY, lambda val: val + 42)
+    """Usage
+       ::
+       
+            update(KEY, lambda val: val + 42)
 
     """
     r = cn or connect()
