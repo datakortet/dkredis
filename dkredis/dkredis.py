@@ -330,7 +330,7 @@ def rate_limiting_lock(resources, seconds=30, cn=None):
     if not resources:
         return True
 
-    keys = dict(('rl-lock.' + r, later(seconds)) for r in resources)
+    keys = dict((b'rl-lock.' + r, later(seconds)) for r in resources)
     r = cn or connect()
 
     if r.msetnx(keys):
