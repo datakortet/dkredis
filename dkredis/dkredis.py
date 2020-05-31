@@ -1,23 +1,23 @@
 # -*- coding: utf-8 -*-
+"""
+Interface to our redis instance.
 
-"""Interface to our redis instance.
+Redis command reference: http://redis.io/commands
 
-   Redis command reference: http://redis.io/commands
+Usage::
 
-   Usage::
+   from dkredis import dkredis
+   r = dkredis.connect()
+   r.set('foo', 'bar')
+   r.get('foo')
+   r.delete('foo')
 
-       from dkredis import dkredis
-       r = dkredis.connect()
-       r.set('foo', 'bar')
-       r.get('foo')
-       r.delete('foo')
+Python interface peculiarities are explained here:
+https://github.com/andymccurdy/redis-py
 
-   Python interface peculiarities are explained here:
-   https://github.com/andymccurdy/redis-py
-
-   The windows version of the redis server that we use is
-   from https://github.com/rgl/redis/downloads
-   ----
+The windows version of the redis server that we use is
+from https://github.com/rgl/redis/downloads
+----
 """
 import os
 import pickle

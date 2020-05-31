@@ -11,6 +11,10 @@ def cn():
     return dkredis.connect()
 
 
+def test_now_later():
+    assert dkredis.now() < dkredis.later(5)
+
+
 def test_mhkeyget(cn):
     "Test of mhkeyget-function."
     assert cn.hmset('lock.a', {'x': 1})
