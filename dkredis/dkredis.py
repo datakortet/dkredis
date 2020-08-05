@@ -21,6 +21,7 @@ from https://github.com/rgl/redis/downloads
 """
 import os
 import pickle
+import sys
 import time
 import redis as _redis
 from contextlib import contextmanager
@@ -330,7 +331,11 @@ def rate_limiting_lock(resources, seconds=30, cn=None):
     if not resources:
         return True
 
-    keys = dict((b'rl-lock.' + r, later(seconds)) for r in resources)
+    if sys.version_info.major < 3:
+        keys = dict((b'rl-lock.' + r, later(seconds)) for r in resources)
+    else:
+        keys = dict((b'rl-lock.' + bytes(r, encoding='utf-8'), later(seconds)) for r in resources)
+
     r = cn or connect()
 
     if r.msetnx(keys):

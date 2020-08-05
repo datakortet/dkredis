@@ -17,6 +17,8 @@ def test_now_later():
 
 def test_mhkeyget(cn):
     "Test of mhkeyget-function."
+    for key in cn.scan_iter("lock.*"):
+        cn.delete(key)
     assert cn.hmset('lock.a', {'x': 1})
     assert cn.hmset('lock.b', {'x': 2})
     assert cn.hmset('lock.c', {'x': 3})
