@@ -1,5 +1,5 @@
 redis==2.10.3
-
+future==0.18.2
 pytest==3.9.3
 # for publishing
 # dkfileutils

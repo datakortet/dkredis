@@ -19,6 +19,7 @@ The windows version of the redis server that we use is
 from https://github.com/rgl/redis/downloads
 ----
 """
+from builtins import str as text
 import os
 import pickle
 import sys
@@ -318,6 +319,15 @@ def mhkeyget(keypattern, field, cn=None):
     return result
 
 
+def convert_to_bytes(r):
+    if isinstance(r, bytes):
+        return r
+    if isinstance(r, text):
+        return r.encode('utf-8')
+    else:
+        return text(r).encode('utf-8')
+
+
 def rate_limiting_lock(resources, seconds=30, cn=None):
     """Lock all the keys and keep them locked for ``seconds`` seconds.
        Useful e.g. to prevent sending email to the same domain more often
@@ -331,10 +341,8 @@ def rate_limiting_lock(resources, seconds=30, cn=None):
     if not resources:
         return True
 
-    if sys.version_info.major < 3:
-        keys = dict((b'rl-lock.' + r, later(seconds)) for r in resources)
-    else:
-        keys = dict((b'rl-lock.' + bytes(r, encoding='utf-8'), later(seconds)) for r in resources)
+    resources = [convert_to_bytes(r) for r in resources]
+    keys = dict((b'rl-lock.' + r, later(seconds)) for r in resources)
 
     r = cn or connect()
 
