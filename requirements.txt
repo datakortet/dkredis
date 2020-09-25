@@ -1,12 +1,7 @@
 redis==2.10.3
-future==0.18.2
-pytest==3.9.3
-# for publishing
-# dkfileutils
-# invoke
-# dk-tasklib
-
+future==0.18.1
+pytest==3.10.1
 pytest-cov==2.6.1
-pytest-forked==1.0.2
+pytest-forked==1.0.2           # WARNING[dkt]: pytest-forked==1.0.2 version mismatch! Should be MISSING (requirements-external.txt)
 pytest-xdist==1.26.1
 
