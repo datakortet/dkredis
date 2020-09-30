@@ -19,9 +19,11 @@ def test_mhkeyget(cn):
     "Test of mhkeyget-function."
     for key in cn.scan_iter("lock.*"):
         cn.delete(key)
-    assert cn.hmset('lock.a', {'x': 1})
-    assert cn.hmset('lock.b', {'x': 2})
-    assert cn.hmset('lock.c', {'x': 3})
+    assert cn.hset('lock.a', key='x', value=1)
+    assert cn.hset('lock.b', key='x', value=2)
+    assert cn.hset('lock.c', key='x', value=3)
+    # assert cn.hset('lock.b', {'x': 2})
+    # assert cn.hset('lock.c', {'x': 3})
     all_locks = {b'lock.a': b'1', b'lock.c': b'3', b'lock.b': b'2'}
     assert dkredis.mhkeyget('lock.*', 'x') == all_locks
     assert cn.delete('lock.a', 'lock.b', 'lock.c')

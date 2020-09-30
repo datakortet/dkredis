@@ -276,7 +276,7 @@ def set_dict(key, dictval, secs=None, cn=None):
        as strings -- use `py_setval` to set dicts with any values.
     """
     r = cn or connect()
-    r.hmset(key, mapping=dictval)
+    r.hset(key, mapping=dictval)
     if secs is not None:
         r.expire(key, secs)
 
@@ -297,11 +297,11 @@ def mhkeyget(keypattern, field, cn=None):
        Usage::
 
          >>> r = connect()
-         >>> r.hmset('lock.a', {'x': 1})
+         >>> r.hset('lock.a', {'x': 1})
          True
-         >>> r.hmset('lock.b', {'x': 2})
+         >>> r.hset('lock.b', {'x': 2})
          True
-         >>> r.hmset('lock.c', {'x': 3})
+         >>> r.hset('lock.c', {'x': 3})
          True
          >>> mhkeyget('lock.*', 'x')
          {'lock.a': '1', 'lock.c': '3', 'lock.b': '2'}
