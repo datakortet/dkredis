@@ -27,6 +27,8 @@ import time
 import redis as _redis
 from contextlib import contextmanager
 
+PICLE_PROTOCOL = 1
+
 
 class Timeout(Exception):  # pragma: nocover
     """A timout limit was exceeded.
@@ -238,7 +240,7 @@ def set_pyval(key, val, secs=None, cn=None):
     """Store any (picleable) value in Redis.
     """
     r = cn or connect()
-    pval = pickle.dumps(val)
+    pval = pickle.dumps(val, protocol=PICLE_PROTOCOL)
     if secs is None:
         r.set(key, pval)
     else:
@@ -274,7 +276,7 @@ def set_dict(key, dictval, secs=None, cn=None):
        as strings -- use `py_setval` to set dicts with any values.
     """
     r = cn or connect()
-    r.hmset(key, dictval)
+    r.hmset(key, mapping=dictval)
     if secs is not None:
         r.expire(key, secs)
 
