@@ -39,11 +39,15 @@ def test_update(cn):
 def test_setmax(cn):
     cn.set('testsetmax', 'hello')
     assert dkredis.setmax('testsetmax', 'world', cn=cn) == 'world'
+    # cn.set('testsetmax', 1)
+    # assert dkredis.setmax('testsetmax', 2, cn=cn) == 2
 
 
 def test_setmin(cn):
     cn.set('testsetmax', 'hello')
     assert dkredis.setmin('testsetmax', 'world', cn=cn) == 'hello'
+    # cn.set('testsetmax', 1)
+    # assert dkredis.setmin('testsetmax', 2, cn=cn) == 1
 
 
 def test_pyval():
@@ -60,4 +64,5 @@ def test_pop_pyval(cn):
 
 def test_dict(cn):
     dkredis.set_dict('testdict', dict(hello='world'), secs=5, cn=cn)
-    assert dkredis.get_dict('testdict', cn=cn) == {b'hello': b'world'}
+    assert dkredis.get_dict('testdict', cn=cn) == {'hello': 'world'}
+

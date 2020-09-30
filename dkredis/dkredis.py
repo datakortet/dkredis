@@ -196,13 +196,13 @@ def update(key, fn, cn=None):
                 val = p.get(key)
                 p.multi()  # --> back to buffered mode
                 newval = fn(val)
-                if isinstance(newval, bytes):
-                    newval.decode('u8')
                 p.set(key, newval)
                 p.execute()  # raises WatchError if anyone has changed `key`
                 break  # success, break out of while loop
             except _redis.WatchError:  # pragma: nocover
                 pass  # someone else got there before us, retry.
+    if isinstance(newval, bytes):
+        newval = newval.decode('u8')
     return newval
 
 
@@ -213,7 +213,8 @@ def setmax(key, val, cn=None):
 
        returns the maximum value.
     """
-    
+    if isinstance(val, text):
+        val = val.encode('u8')
     return update(key, lambda v: max(v, val), cn=cn)
 
 
@@ -224,6 +225,8 @@ def setmin(key, val, cn=None):
 
        returns the maximum value.
     """
+    if isinstance(val, text):
+        val = val.encode('u8')
     return update(key, lambda v: min(v, val), cn=cn)
 
 
@@ -291,7 +294,7 @@ def get_dict(key, cn=None):
     res = {}
     for fieldname in r.hkeys(key):
         res[fieldname] = r.hget(key, fieldname)
-    return res
+    return {k.decode('u8'): v.decode('u8') for k, v in res.items()}
 
 
 def mhkeyget(keypattern, field, cn=None):
