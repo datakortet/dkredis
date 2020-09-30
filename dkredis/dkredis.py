@@ -27,6 +27,8 @@ import time
 import redis as _redis
 from contextlib import contextmanager
 
+PICLE_PROTOCOL = 1
+
 
 class Timeout(Exception):  # pragma: nocover
     """A timout limit was exceeded.
@@ -199,6 +201,8 @@ def update(key, fn, cn=None):
                 break  # success, break out of while loop
             except _redis.WatchError:  # pragma: nocover
                 pass  # someone else got there before us, retry.
+    if isinstance(newval, bytes):
+        newval = newval.decode('u8')
     return newval
 
 
@@ -209,6 +213,8 @@ def setmax(key, val, cn=None):
 
        returns the maximum value.
     """
+    if isinstance(val, text):
+        val = val.encode('u8')
     return update(key, lambda v: max(v, val), cn=cn)
 
 
@@ -219,6 +225,8 @@ def setmin(key, val, cn=None):
 
        returns the maximum value.
     """
+    if isinstance(val, text):
+        val = val.encode('u8')
     return update(key, lambda v: min(v, val), cn=cn)
 
 
@@ -238,7 +246,7 @@ def set_pyval(key, val, secs=None, cn=None):
     """Store any (picleable) value in Redis.
     """
     r = cn or connect()
-    pval = pickle.dumps(val)
+    pval = pickle.dumps(val, protocol=PICLE_PROTOCOL)
     if secs is None:
         r.set(key, pval)
     else:
@@ -274,7 +282,7 @@ def set_dict(key, dictval, secs=None, cn=None):
        as strings -- use `py_setval` to set dicts with any values.
     """
     r = cn or connect()
-    r.hmset(key, dictval)
+    r.hset(key, mapping=dictval)
     if secs is not None:
         r.expire(key, secs)
 
@@ -286,7 +294,7 @@ def get_dict(key, cn=None):
     res = {}
     for fieldname in r.hkeys(key):
         res[fieldname] = r.hget(key, fieldname)
-    return res
+    return {k.decode('u8'): v.decode('u8') for k, v in res.items()}
 
 
 def mhkeyget(keypattern, field, cn=None):
@@ -295,11 +303,11 @@ def mhkeyget(keypattern, field, cn=None):
        Usage::
 
          >>> r = connect()
-         >>> r.hmset('lock.a', {'x': 1})
+         >>> r.hset('lock.a', {'x': 1})
          True
-         >>> r.hmset('lock.b', {'x': 2})
+         >>> r.hset('lock.b', {'x': 2})
          True
-         >>> r.hmset('lock.c', {'x': 3})
+         >>> r.hset('lock.c', {'x': 3})
          True
          >>> mhkeyget('lock.*', 'x')
          {'lock.a': '1', 'lock.c': '3', 'lock.b': '2'}
@@ -315,8 +323,8 @@ def mhkeyget(keypattern, field, cn=None):
     hashes = r.keys(keypattern)
     for h in hashes:
         result[h] = r.hget(h, field)
-
-    return result
+    # XXX: redis always returns bytes, and we want unicode
+    return {k.decode('u8'): v.decode('u8') for k, v in result.items()}
 
 
 def convert_to_bytes(r):
