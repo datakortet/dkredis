@@ -196,6 +196,8 @@ def update(key, fn, cn=None):
                 val = p.get(key)
                 p.multi()  # --> back to buffered mode
                 newval = fn(val)
+                if isinstance(newval, bytes):
+                    newval.decode('u8')
                 p.set(key, newval)
                 p.execute()  # raises WatchError if anyone has changed `key`
                 break  # success, break out of while loop
@@ -211,6 +213,7 @@ def setmax(key, val, cn=None):
 
        returns the maximum value.
     """
+    
     return update(key, lambda v: max(v, val), cn=cn)
 
 
@@ -317,8 +320,8 @@ def mhkeyget(keypattern, field, cn=None):
     hashes = r.keys(keypattern)
     for h in hashes:
         result[h] = r.hget(h, field)
-
-    return result
+    # XXX: redis always returns bytes, and we want unicode
+    return {k.decode('u8'): v.decode('u8') for k, v in result.items()}
 
 
 def convert_to_bytes(r):

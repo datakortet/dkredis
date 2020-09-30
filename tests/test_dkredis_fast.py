@@ -24,7 +24,7 @@ def test_mhkeyget(cn):
     assert cn.hset('lock.c', key='x', value=3)
     # assert cn.hset('lock.b', {'x': 2})
     # assert cn.hset('lock.c', {'x': 3})
-    all_locks = {b'lock.a': b'1', b'lock.c': b'3', b'lock.b': b'2'}
+    all_locks = {'lock.a': '1', 'lock.c': '3', 'lock.b': '2'}
     assert dkredis.mhkeyget('lock.*', 'x') == all_locks
     assert cn.delete('lock.a', 'lock.b', 'lock.c')
 
@@ -37,13 +37,13 @@ def test_update(cn):
 
 
 def test_setmax(cn):
-    cn.set('testsetmax', b'hello')
-    assert dkredis.setmax('testsetmax', b'world', cn=cn) == b'world'
+    cn.set('testsetmax', 'hello')
+    assert dkredis.setmax('testsetmax', 'world', cn=cn) == 'world'
 
 
 def test_setmin(cn):
-    cn.set('testsetmax', b'hello')
-    assert dkredis.setmin('testsetmax', b'world', cn=cn) == b'hello'
+    cn.set('testsetmax', 'hello')
+    assert dkredis.setmin('testsetmax', 'world', cn=cn) == 'hello'
 
 
 def test_pyval():
