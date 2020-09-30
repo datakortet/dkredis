@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Object cache implementation using redis as a backend.
 """
-from __future__ import absolute_import
+from __future__ import print_function, absolute_import
 import pickle
 import hashlib
 import zlib
@@ -10,6 +10,14 @@ from . import dkredis
 
 
 PICLE_PROTOCOL = 0
+REDIS_CACHE_DEBUG = True
+
+if REDIS_CACHE_DEBUG:
+    def writeln(*args, **kw):
+        return print(*args, **kw)
+else:
+    def writeln(*args, **kw):
+        return None
 
 
 def _cache_serialize(val):
@@ -59,12 +67,14 @@ class cache(object):
     @classmethod
     def remove(cls, key):
         "Remove key from cache."
+        writeln("CACHE:REMOVE:", key)
         r = dkredis.connect()
         r.delete(cls.rediskey(key))
 
     @classmethod
     def put(cls, key, value, duration=None):
         "Put ``value`` in cache, under ``key``, for ``duration`` seconds."
+        writeln("CACHE:PUT[%r] = [[%r]] @%r" % (key, value, duration))
         if duration is None:
             _duration = 30 * 60  # 30 minutes
         elif hasattr(duration, 'to_int'):
@@ -83,6 +93,7 @@ class cache(object):
         v = _cache_serialize(value)
 
         r = dkredis.connect()
+        writeln("....cache:put:setex(%r, %r, %r) for %r" % (k, _duration, v, key))
         r.setex(k, _duration, v)
 
     @classmethod
@@ -95,7 +106,12 @@ class cache(object):
         "Fetch value for ``key`` from redis."
         val = cls._raw_get(key)
         if val is not None:
-            return _cache_unserialize(val)
+            res = _cache_unserialize(val)
+            import json
+            writeln("CACHE:GET(%r) => %s" % (key, json.dumps(res, indent=4)))
+            # writeln("CACHE:GET(%r) => %r" % (key, res))
+            return res
+        writeln("CACHE:GET(%r) => NOT-FOUND" % key)
         raise cls.DoesNotExist(
             "Value not in cache (possibly due to expiration).")
 
