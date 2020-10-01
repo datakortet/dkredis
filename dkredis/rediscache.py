@@ -49,7 +49,7 @@ class cache(object):
     def rediskey(key):
         "The redis key is obj-cache. + the md5 hexdigest of its serialization."
         k = _cache_serialize(key)
-        return "obj-cache." + hashlib.md5(k).hexdigest()
+        return "obj-cache:" + hashlib.md5(k).hexdigest()
 
     @classmethod
     def ping(cls):
