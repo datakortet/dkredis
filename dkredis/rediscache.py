@@ -9,19 +9,21 @@ import base64
 from . import dkredis
 
 
-PICLE_PROTOCOL = 0
+PICLE_PROTOCOL = 1
 
 
 def _cache_serialize(val):
     """Serialize a python value to go into the cache.
     """
-    return base64.b64encode(zlib.compress(pickle.dumps(val,protocol=PICLE_PROTOCOL)))
+    # return base64.b64encode(zlib.compress(pickle.dumps(val, protocol=PICLE_PROTOCOL)))
+    return pickle.dumps(val, protocol=PICLE_PROTOCOL)
 
 
 def _cache_unserialize(val):
     """Unserialize a python value from the cache.
     """
-    return pickle.loads(zlib.decompress(base64.b64decode(val)))
+    # return pickle.loads(zlib.decompress(base64.b64decode(val)))
+    return pickle.loads(val)
 
 
 class cache(object):
@@ -48,8 +50,11 @@ class cache(object):
     @staticmethod
     def rediskey(key):
         "The redis key is obj-cache. + the md5 hexdigest of its serialization."
-        k = _cache_serialize(key)
-        return "obj-cache." + hashlib.md5(k).hexdigest()
+        if isinstance(key, str):
+            k = key
+        else:
+            k = hashlib.md5(_cache_serialize(key)).hexdigest()
+        return "obj-cache:" + k
 
     @classmethod
     def ping(cls):
