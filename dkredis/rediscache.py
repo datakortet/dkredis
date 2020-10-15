@@ -107,8 +107,8 @@ class cache(object):
         val = cls._raw_get(key)
         if val is not None:
             res = _cache_unserialize(val)
-            import json
-            writeln("CACHE:GET(%r) => %s" % (key, json.dumps(res, indent=4)))
+            # import json
+            # writeln("CACHE:GET(%r) => %s" % (key, json.dumps(res, indent=4)))
             # writeln("CACHE:GET(%r) => %r" % (key, res))
             return res
         writeln("CACHE:GET(%r) => NOT-FOUND" % key)
