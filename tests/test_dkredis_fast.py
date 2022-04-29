@@ -2,13 +2,15 @@
 
 """Fast tests of dkredis (no timeout tests).
 """
+import os
 import dkredis
 import pytest
 
 
 @pytest.fixture
 def cn():
-    return dkredis.connect()
+    print(os.environ)
+    return dkredis.connect(host='redis', password='')
 
 
 def test_now_later():

@@ -1,4 +1,7 @@
 
+services:
+  - redis:latest
+
 include:
   - project: 'norsktest/dktools'
     file: '/ci-templates/dkbuild.yml'
