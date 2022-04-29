@@ -4,8 +4,6 @@
 from __future__ import print_function, absolute_import
 import pickle
 import hashlib
-import zlib
-import base64
 from . import dkredis
 
 
@@ -23,7 +21,6 @@ else:
 def _cache_serialize(val):
     """Serialize a python value to go into the cache.
     """
-    # return base64.b64encode(zlib.compress(pickle.dumps(val, protocol=PICLE_PROTOCOL)))
     return pickle.dumps(val, protocol=PICLE_PROTOCOL)
 
 
@@ -95,14 +92,16 @@ class cache(object):
         v = _cache_serialize(value)
 
         r = dkredis.connect()
-        writeln("....cache:put:setex(%r, %r, %r) for %r" % (k, _duration, v, key))
+        writeln("....cache:put:setex(%r, %r, %r) for %r" % (
+            k, _duration, v, key
+        ))
         r.setex(k, _duration, v)
 
     @classmethod
     def _raw_get(cls, key):
         r = dkredis.connect()
         return r.get(cls.rediskey(key))
-    
+
     @classmethod
     def get(cls, key):
         "Fetch value for ``key`` from redis."
@@ -127,7 +126,7 @@ class cache(object):
 
 class djangocache(object):
     "Django facade to the rediscache."
-    
+
     @classmethod
     def get(cls, key, default=None):
         return cache.get_value(key, default)
@@ -194,11 +193,12 @@ def cached(cache_key=None, timeout=3600):
             elif callable(cache_key):
                 key = cache_key(*args, **kws)
             else:
-                key = hashlib.sha1(
-                    (str(func.__module__)
+                key = hashlib.sha1((
+                    str(func.__module__)
                     + str(func.__name__)
                     + str(args)
-                    + str(kws)).encode('ascii')
+                    + str(kws)
+                    ).encode('ascii')
                 ).hexdigest()
             # key = "FNCACHED-" + key
             try:

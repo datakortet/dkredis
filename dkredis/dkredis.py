@@ -22,7 +22,6 @@ from https://github.com/rgl/redis/downloads
 from builtins import str as text
 import os
 import pickle
-import sys
 import time
 import redis as _redis
 from contextlib import contextmanager
@@ -101,7 +100,8 @@ class Timeout(Exception):  # pragma: nocover
 #         val = get_pyval(key, cn=r)
 #         r.delete(key)
 #         # with r.pipeline() as p:
-#         #     val = get_pyval(key, p)  # can't get a val in the middle of a pipeline
+#         #     # can't get a val in the middle of a pipeline
+#         #     val = get_pyval(key, p)
 #         #     p.delete(key)
 #         #     p.execute()
 #         return val
@@ -125,7 +125,8 @@ class Timeout(Exception):  # pragma: nocover
 #                     p.multi()  # --> back to buffered mode
 #                     newval = fn(val)
 #                     p.set(key, newval)
-#                     p.execute()  # raises WatchError if anyone has changed `key`
+#                     # raises WatchError if anyone has changed `key`
+#                     p.execute()
 #                     break  # success, break out of while loop
 #                 except _redis.WatchError:  # pragma: nocover
 #                     pass  # someone else got there before us, retry.
@@ -164,8 +165,10 @@ def connect(host=None, port=6379, db=0, password=None):
 #         return max(cutoff, min(a, b))
 #     return update_binop(fn)
 #
-# setmin_cut = lambda cut: lambda a, b: update_binop(lambda a,b: max(cut, min(a, b)))
-# setmax_cut = lambda cut: lambda a, b: update_binop(lambda a,b: min(cut, max(a, b)))
+# setmin_cut = lambda cut: lambda a, b: update_binop(
+#                                           lambda a,b: max(cut, min(a, b)))
+# setmax_cut = lambda cut: lambda a, b: update_binop(
+#                                           lambda a,b: min(cut, max(a, b)))
 #
 # setmin0 = setmin_cut(0)
 # setmax0 = setmax_cut(0)
@@ -184,7 +187,7 @@ def connect(host=None, port=6379, db=0, password=None):
 def update(key, fn, cn=None):
     """Usage
        ::
-       
+
             update(KEY, lambda val: val + 42)
 
     """
@@ -271,7 +274,8 @@ def pop_pyval(key, cn=None):
     val = get_pyval(key, cn=r)
     r.delete(key)
     # with r.pipeline() as p:
-    #     val = get_pyval(key, p)  # can't get a val in the middle of a pipeline
+    #     # can't get a val in the middle of a pipeline
+    #     val = get_pyval(key, p)
     #     p.delete(key)
     #     p.execute()
     return val
