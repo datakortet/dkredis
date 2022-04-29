@@ -9,8 +9,7 @@ import pytest
 
 @pytest.fixture
 def cn():
-    print(os.environ)
-    return dkredis.connect(host='redis', password='')
+    return dkredis.connect()
 
 
 def test_now_later():
