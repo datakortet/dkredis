@@ -63,6 +63,10 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - uses: supercharge/redis-github-action@1.4.0
+        with:
+          redis-version: 6
+
       - run: pip install -r requirements.txt
       - run: pip list
       - run: pytest -vv --cov=dkredis tests
