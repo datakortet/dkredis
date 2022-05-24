@@ -66,7 +66,7 @@ class cache(object):
     @classmethod
     def remove(cls, key):
         "Remove key from cache."
-        writeln("CACHE:REMOVE:", key)
+        # writeln("CACHE:REMOVE:", key)
         r = dkredis.connect()
         r.delete(cls.rediskey(key))
 
