@@ -8,7 +8,7 @@ from . import dkredis
 
 
 PICLE_PROTOCOL = 1
-REDIS_CACHE_DEBUG = True
+REDIS_CACHE_DEBUG = False
 
 if REDIS_CACHE_DEBUG:
     def writeln(*args, **kw):
