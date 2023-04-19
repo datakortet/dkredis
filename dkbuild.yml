@@ -8,3 +8,6 @@ package:
 
 build:
   venv: dkredis
+
+requirements:
+  update: manual

@@ -18,7 +18,6 @@ The windows version of the redis server that we use is
 from https://github.com/rgl/redis/downloads
 ----
 """
-from builtins import str as text
 import os
 import pickle
 import time
@@ -215,7 +214,7 @@ def setmax(key, val, cn=None):
 
        returns the maximum value.
     """
-    if isinstance(val, text):
+    if isinstance(val, str):
         val = val.encode('u8')
     return update(key, lambda v: max(v, val), cn=cn)
 
@@ -227,7 +226,7 @@ def setmin(key, val, cn=None):
 
        returns the maximum value.
     """
-    if isinstance(val, text):
+    if isinstance(val, str):
         val = val.encode('u8')
     return update(key, lambda v: min(v, val), cn=cn)
 
@@ -333,10 +332,10 @@ def mhkeyget(keypattern, field, cn=None):
 def convert_to_bytes(r):
     if isinstance(r, bytes):
         return r
-    if isinstance(r, text):
+    if isinstance(r, str):
         return r.encode('utf-8')
     else:
-        return text(r).encode('utf-8')
+        return str(r).encode('utf-8')
 
 
 def rate_limiting_lock(resources, seconds=30, cn=None):

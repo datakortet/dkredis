@@ -25,7 +25,6 @@ will fit your use case.
 
 """
 # pragma: nocover
-from __future__ import print_function
 import os
 import warnings
 
