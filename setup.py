@@ -20,7 +20,7 @@ setuptools.setup(
     name='dkredis',
     version=version,
     install_requires=[
-        'redis==3.5.3',
+        'redis==4.5.4',
     ],
     description=__doc__.strip(),
     classifiers=[line for line in classifiers.split('\n') if line],
