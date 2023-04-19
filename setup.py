@@ -18,13 +18,18 @@ version = '0.1.8'
 
 setuptools.setup(
     name='dkredis',
+    keywords='redis',
     version=version,
+    url='https://github.com/datakortet/dkredis',
     install_requires=[
         'redis==4.5.4',
     ],
     description=__doc__.strip(),
     classifiers=[line for line in classifiers.split('\n') if line],
     long_description=open('README.rst').read(),
+    license='MIT',
+    author='bjorn',
+    author_email='bp@datakortet.no',
     packages=['dkredis'],
     zip_safe=False,
 )
