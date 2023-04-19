@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 "dkredis"
 
 # pylint:disable=R0904

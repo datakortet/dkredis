@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Fast tests of dkredis (no timeout tests).
 """
 import os

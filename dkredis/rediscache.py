@@ -1,11 +1,12 @@
-# -*- coding: utf-8 -*-
-"""Object cache implementation using redis as a backend.
 """
-from __future__ import print_function, absolute_import
+Object cache implementation using redis as a backend.
+"""
 import pickle
 import hashlib
 from . import dkredis
+import logging
 
+log = logging.getLogger(__name__)
 
 PICLE_PROTOCOL = 1
 REDIS_CACHE_DEBUG = False
@@ -31,7 +32,7 @@ def _cache_unserialize(val):
     return pickle.loads(val)
 
 
-class cache(object):
+class cache:
     """Usage::
 
          from dkredis.rediscache import cache
@@ -65,15 +66,18 @@ class cache(object):
 
     @classmethod
     def remove(cls, key):
-        "Remove key from cache."
-        # writeln("CACHE:REMOVE:", key)
+        """Remove key from cache.
+        """
+        log.debug("CACHE:REMOVE: %r", key)
         r = dkredis.connect()
         r.delete(cls.rediskey(key))
 
     @classmethod
     def put(cls, key, value, duration=None):
-        "Put ``value`` in cache, under ``key``, for ``duration`` seconds."
-        writeln("CACHE:PUT[%r] = [[%r]] @%r" % (key, value, duration))
+        """Put ``value`` in cache, under ``key``, for ``duration`` seconds.
+        """
+        # writeln("CACHE:PUT[%r] = [[%r]] @%r" % (key, value, duration))
+        log.debug("CACHE:PUT[%r] = [[%r]] @%r", key, value, duration)
         if duration is None:
             _duration = 30 * 60  # 30 minutes
         elif hasattr(duration, 'to_int'):
@@ -86,21 +90,25 @@ class cache(object):
             _duration = int(duration)  # try int conversion, throws ValueError
         assert _duration >= 1  # smallest cache duration is +1 second
 
-        cls.remove(key)
+        # no need to remove an existing key...
+        # cls.remove(key)
 
         k = cls.rediskey(key)
         v = _cache_serialize(value)
 
         r = dkredis.connect()
-        writeln("....cache:put:setex(%r, %r, %r) for %r" % (
-            k, _duration, v, key
-        ))
-        r.setex(k, _duration, v)
+        # writeln("....cache:put:setex(%r, %r, %r) for %r" % (
+        #     k, _duration, v, key
+        # ))
+        log.debug("....cache:put:setex(%r, %r, %r) for %r", k, _duration, v, key)
+        r.set(k, v, ex=_duration)
 
     @classmethod
     def _raw_get(cls, key):
         r = dkredis.connect()
-        return r.get(cls.rediskey(key))
+        rkey = cls.rediskey(key)
+        log.debug("KEY: %s, TTL: %r", key, r.ttl(rkey))
+        return r.get(rkey)
 
     @classmethod
     def get(cls, key):
@@ -111,8 +119,10 @@ class cache(object):
             # import json
             # writeln("CACHE:GET(%r) => %s" % (key, json.dumps(res, indent=4)))
             # writeln("CACHE:GET(%r) => %r" % (key, res))
+            log.debug("CACHE:GET(%r) => %r", key, res)
             return res
-        writeln("CACHE:GET(%r) => NOT-FOUND" % key)
+        # writeln("CACHE:GET(%r) => NOT-FOUND" % key)
+        log.debug("CACHE:GET(%r) => NOT-FOUND", key)
         raise cls.DoesNotExist(
             "Value not in cache (possibly due to expiration).")
 
@@ -124,7 +134,7 @@ class cache(object):
             return default
 
 
-class djangocache(object):
+class djangocache:
     "Django facade to the rediscache."
 
     @classmethod
@@ -136,7 +146,7 @@ class djangocache(object):
         cache.put(key, value, duration)
 
 
-class Cached(object):
+class Cached:
     """Mixin class to invalidate cache keys on model.save().
 
        Usage::
@@ -155,7 +165,7 @@ class Cached(object):
     def save(self, *args, **kwargs):
         for ckey in self.cache_keys:
             cache.remove(ckey)
-        super(Cached, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def get_cache_values(self):
         """Get all cached values for this object.

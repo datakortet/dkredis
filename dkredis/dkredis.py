@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Interface to our redis instance.
 
@@ -34,7 +33,7 @@ class Timeout(Exception):  # pragma: nocover
     """
 
     def __init__(self, retry=0):
-        super(Timeout, self).__init__()
+        super().__init__()
         self.retry = retry
 
 
@@ -354,7 +353,7 @@ def rate_limiting_lock(resources, seconds=30, cn=None):
         return True
 
     resources = [convert_to_bytes(r) for r in resources]
-    keys = dict((b'rl-lock.' + r, later(seconds)) for r in resources)
+    keys = {b'rl-lock.' + r: later(seconds) for r in resources}
 
     r = cn or connect()
 
