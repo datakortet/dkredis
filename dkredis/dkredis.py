@@ -470,7 +470,8 @@ def rate_limiting_lock(resources, seconds=30, cn=None):
 
 
 @contextmanager
-def mutex(name, seconds: int=30, timeout: int=60, unlock: bool=True, waitsecs: int=3):
+def mutex(name, seconds: int = 30, timeout: int = 60,
+          unlock: bool = True, waitsecs: int = 3):
     """Lock the ``name`` for ``seconds``, waiting ``waitsecs`` seconds
        between each attempt at locking the name.  Locking means creating
        a key 'dkredis:mutex:' + key.
