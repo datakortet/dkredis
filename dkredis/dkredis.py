@@ -469,6 +469,8 @@ def rate_limiting_lock(resources, seconds=30, cn=None):
     return False
 
 
+# XXX: [bp-2023-12-17] No idea what this is supposed to be used for, but it is
+#      definitely not a mutex implementation...
 @contextmanager
 def mutex(name, seconds: int = 30, timeout: int = 60,
           unlock: bool = True, waitsecs: int = 3):
