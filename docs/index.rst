@@ -4,18 +4,49 @@
 
 
 
+Module contents
+---------------
 
-..
-  Contents:
-  .. toctree::
-     :maxdepth: 2
-
-
-API documentation
-=================
+.. automodule:: dkredis
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 
-.. include:: modules.rst
+Submodules
+----------
+
+dkredis.dkredis module
+----------------------
+
+.. automodule:: dkredis.dkredis
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+dkredis.dkredislocks module
+---------------------------
+
+.. automodule:: dkredis.dkredislocks
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+dkredis.rediscache module
+-------------------------
+
+.. automodule:: dkredis.rediscache
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+dkredis.utils module
+--------------------
+
+.. automodule:: dkredis.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
 
 

@@ -33,21 +33,22 @@ def _cache_unserialize(val):
 
 
 class cache:
-    """Usage::
+    """Python value cache.
 
-         from dkredis.rediscache import cache
+       Usage::
 
-         try:
-             v = cache.get(key)
-         except cache.DoesNotExist:
-             v = mk_object_value(...)
-             cache.put(
-                 key, v,
-                 duration=secs)  # or datetime.duration()
+            from dkredis.rediscache import cache
 
-          you can use a datetime value for the valid_until parameter,
-          or anything the timeperiod.when() function accepts.
+            try:
+                v = cache.get(key)
+            except cache.DoesNotExist:
+                v = mk_object_value(...)
+                cache.put(
+                    key, v,
+                    duration=secs)  # or datetime.duration()
 
+       you can use a datetime value for the valid_until parameter,
+       or anything the timeperiod.when() function accepts.
     """
 
     class DoesNotExist(Exception):
