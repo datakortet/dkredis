@@ -14,7 +14,7 @@ Topic :: Software Development :: Libraries
 
 import setuptools
 
-version = '0.1.9'
+version = '1.0.0'
 
 setuptools.setup(
     name='dkredis',

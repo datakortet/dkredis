@@ -3,7 +3,7 @@ _schema: https://static.datakortet.no/schema/dkbuild.schema.yaml
 package:
   name: dkredis
   description: Python interface to Redis
-  version: 0.1.9
+  version: 1.0.0
   created: 2019
 
 build:
