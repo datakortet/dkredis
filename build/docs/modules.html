@@ -1,18 +1,18 @@
+<!DOCTYPE html>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>dkredis &#8212; dkredis 0.0.2 documentation</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>dkredis &#8212; dkredis 0.1.9 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=89b800e6" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=a4622379"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
   </head><body>
@@ -22,7 +22,11 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="index.html">dkredis 0.0.2 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">dkredis 0.1.9 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">dkredis</a></li> 
       </ul>
     </div>  
 
@@ -31,21 +35,75 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="dkredis">
-<h1>dkredis<a class="headerlink" href="#dkredis" title="Permalink to this headline">¶</a></h1>
+  <section id="dkredis">
+<h1>dkredis<a class="headerlink" href="#dkredis" title="Permalink to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="dkredis.html">dkredis package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dkredis.html#module-dkredis">Module contents</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dkredis.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dkredis.html#dkredis-dkredis-module">dkredis.dkredis module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dkredis.html#module-contents">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dkredis.html#module-dkredis.dkredis">dkredis.dkredis module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.dkredis.Timeout"><code class="docutils literal notranslate"><span class="pre">Timeout</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.dkredis.connect"><code class="docutils literal notranslate"><span class="pre">connect()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.dkredis.get_dict"><code class="docutils literal notranslate"><span class="pre">get_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.dkredis.get_pyval"><code class="docutils literal notranslate"><span class="pre">get_pyval()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.dkredis.mhkeyget"><code class="docutils literal notranslate"><span class="pre">mhkeyget()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.dkredis.pop_pyval"><code class="docutils literal notranslate"><span class="pre">pop_pyval()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.dkredis.set_dict"><code class="docutils literal notranslate"><span class="pre">set_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.dkredis.set_pyval"><code class="docutils literal notranslate"><span class="pre">set_pyval()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.dkredis.setmax"><code class="docutils literal notranslate"><span class="pre">setmax()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.dkredis.setmin"><code class="docutils literal notranslate"><span class="pre">setmin()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.dkredis.update"><code class="docutils literal notranslate"><span class="pre">update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dkredis.html#module-dkredis.dkredislocks">dkredis.dkredislocks module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.dkredislocks.fetch_lock"><code class="docutils literal notranslate"><span class="pre">fetch_lock()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.dkredislocks.mutex"><code class="docutils literal notranslate"><span class="pre">mutex()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.dkredislocks.rate_limiting_lock"><code class="docutils literal notranslate"><span class="pre">rate_limiting_lock()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dkredis.html#module-dkredis.rediscache">dkredis.rediscache module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.rediscache.Cached"><code class="docutils literal notranslate"><span class="pre">Cached</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dkredis.html#dkredis.rediscache.Cached.cache_keys"><code class="docutils literal notranslate"><span class="pre">Cached.cache_keys</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dkredis.html#dkredis.rediscache.Cached.get_cache_values"><code class="docutils literal notranslate"><span class="pre">Cached.get_cache_values()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dkredis.html#dkredis.rediscache.Cached.save"><code class="docutils literal notranslate"><span class="pre">Cached.save()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.rediscache.cache"><code class="docutils literal notranslate"><span class="pre">cache</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dkredis.html#dkredis.rediscache.cache.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">cache.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dkredis.html#dkredis.rediscache.cache.get"><code class="docutils literal notranslate"><span class="pre">cache.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dkredis.html#dkredis.rediscache.cache.get_value"><code class="docutils literal notranslate"><span class="pre">cache.get_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dkredis.html#dkredis.rediscache.cache.ping"><code class="docutils literal notranslate"><span class="pre">cache.ping()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dkredis.html#dkredis.rediscache.cache.put"><code class="docutils literal notranslate"><span class="pre">cache.put()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dkredis.html#dkredis.rediscache.cache.rediskey"><code class="docutils literal notranslate"><span class="pre">cache.rediskey()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dkredis.html#dkredis.rediscache.cache.remove"><code class="docutils literal notranslate"><span class="pre">cache.remove()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.rediscache.cached"><code class="docutils literal notranslate"><span class="pre">cached()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.rediscache.djangocache"><code class="docutils literal notranslate"><span class="pre">djangocache</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dkredis.html#dkredis.rediscache.djangocache.get"><code class="docutils literal notranslate"><span class="pre">djangocache.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="dkredis.html#dkredis.rediscache.djangocache.set"><code class="docutils literal notranslate"><span class="pre">djangocache.set()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.rediscache.writeln"><code class="docutils literal notranslate"><span class="pre">writeln()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dkredis.html#module-dkredis.utils">dkredis.utils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.utils.convert_to_bytes"><code class="docutils literal notranslate"><span class="pre">convert_to_bytes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.utils.is_valid_identifier"><code class="docutils literal notranslate"><span class="pre">is_valid_identifier()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.utils.later"><code class="docutils literal notranslate"><span class="pre">later()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.utils.now"><code class="docutils literal notranslate"><span class="pre">now()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dkredis.html#dkredis.utils.unique_id"><code class="docutils literal notranslate"><span class="pre">unique_id()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </div>
-</div>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -59,17 +117,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -80,12 +136,16 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="index.html">dkredis 0.0.2 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">dkredis 0.1.9 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">dkredis</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 Bjorn Pettersen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    &#169; Copyright 2014 Bjorn Pettersen.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
     </div>
   </body>
 </html>

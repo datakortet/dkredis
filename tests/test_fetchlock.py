@@ -1,8 +1,8 @@
 from multiprocessing.pool import ThreadPool
 import time
 from uuid import uuid1, uuid4
-from dkredis.dkredis import unique_id, fetch_lock
-
+from dkredis.dkredislocks import fetch_lock
+from dkredis import unique_id
 
 import pytest
 from unittest.mock import Mock, call, ANY
@@ -27,7 +27,7 @@ def test_fetch_lock_not_acquired(redis_mock):
     redis_mock.set.return_value = False
 
     with fetch_lock('weatherapi', cn=redis_mock) as should_fetch:
-        assert redis_mock.set.call_args == call('lock:si:weatherapi', value=ANY, ex=5, nx=True)
+        assert redis_mock.set.call_args == call('dkredis:fetchlock:weatherapi', value=ANY, ex=5, nx=True)
         assert not should_fetch
 
     assert not redis_mock.eval.called

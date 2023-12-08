@@ -6,16 +6,18 @@ import pytest
 import dkredis
 import time
 
+import dkredis.dkredislocks
+
 
 def test_rate_limiting_lock():
     "Test of rate_limiting_lock-function."
-    assert dkredis.rate_limiting_lock([], 0.5) is True
-    assert dkredis.rate_limiting_lock({'x2': 1}, 1) is True
-    assert dkredis.rate_limiting_lock({'x2': 1}, 0.5) is False
+    assert dkredis.dkredislocks.rate_limiting_lock([], 0.5) is True
+    assert dkredis.dkredislocks.rate_limiting_lock({'x2': 1}, 1) is True
+    assert dkredis.dkredislocks.rate_limiting_lock({'x2': 1}, 0.5) is False
     time.sleep(1.5)
-    assert dkredis.rate_limiting_lock({'x2': 1}, 4) is True
+    assert dkredis.dkredislocks.rate_limiting_lock({'x2': 1}, 4) is True
 
 
 def test_mutex():
-    with dkredis.mutex('d', 1) as lock:
+    with dkredis.dkredislocks.mutex('d', 1) as lock:
         assert lock is None

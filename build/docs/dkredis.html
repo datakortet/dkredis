@@ -1,18 +1,18 @@
+<!DOCTYPE html>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>dkredis package &#8212; dkredis 0.0.2 documentation</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>dkredis package &#8212; dkredis 0.1.9 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=89b800e6" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=a4622379"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="dkredis - Python interface to Redis" href="index.html" /> 
@@ -24,9 +24,13 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="index.html" title="dkredis - Python interface to Redis"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">dkredis 0.0.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">dkredis 0.1.9 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">dkredis package</a></li> 
       </ul>
     </div>  
 
@@ -35,38 +39,463 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="dkredis-package">
-<h1>dkredis package<a class="headerlink" href="#dkredis-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+  <section id="dkredis-package">
+<h1>dkredis package<a class="headerlink" href="#dkredis-package" title="Permalink to this heading">¶</a></h1>
+<section id="module-dkredis">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-dkredis" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-dkredis.dkredis">
+<span id="dkredis-dkredis-module"></span><h2>dkredis.dkredis module<a class="headerlink" href="#module-dkredis.dkredis" title="Permalink to this heading">¶</a></h2>
+<p>Interface to our redis instance.</p>
+<p>Redis command reference: <a class="reference external" href="http://redis.io/commands">http://redis.io/commands</a></p>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dkredis</span> <span class="kn">import</span> <span class="n">dkredis</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">dkredis</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="n">r</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
+</pre></div>
 </div>
-<div class="section" id="dkredis-dkredis-module">
-<h2>dkredis.dkredis module<a class="headerlink" href="#dkredis-dkredis-module" title="Permalink to this headline">¶</a></h2>
+<p>Python interface peculiarities are explained here:
+<a class="reference external" href="https://github.com/andymccurdy/redis-py">https://github.com/andymccurdy/redis-py</a></p>
+<p>The windows version of the redis server that we use is
+from <a class="reference external" href="https://github.com/rgl/redis/downloads">https://github.com/rgl/redis/downloads</a>
+—-</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="dkredis.dkredis.Timeout">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dkredis.dkredis.</span></span><span class="sig-name descname"><span class="pre">Timeout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">retry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/dkredis.html#Timeout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.dkredis.Timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<p>A timout limit was exceeded.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dkredis.dkredis.connect">
+<span class="sig-prename descclassname"><span class="pre">dkredis.dkredis.</span></span><span class="sig-name descname"><span class="pre">connect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6379</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/dkredis.html#connect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.dkredis.connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a connection to the redis server.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dkredis.dkredis.get_dict">
+<span class="sig-prename descclassname"><span class="pre">dkredis.dkredis.</span></span><span class="sig-name descname"><span class="pre">get_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/dkredis.html#get_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.dkredis.get_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a redis hash as a python dict.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dkredis.dkredis.get_pyval">
+<span class="sig-prename descclassname"><span class="pre">dkredis.dkredis.</span></span><span class="sig-name descname"><span class="pre">get_pyval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/dkredis.html#get_pyval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.dkredis.get_pyval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a Python value from Redis.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dkredis.dkredis.mhkeyget">
+<span class="sig-prename descclassname"><span class="pre">dkredis.dkredis.</span></span><span class="sig-name descname"><span class="pre">mhkeyget</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keypattern</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/dkredis.html#mhkeyget"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.dkredis.mhkeyget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a field from multiple hashes.</p>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">connect</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">hset</span><span class="p">(</span><span class="s1">&#39;lock.a&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">hset</span><span class="p">(</span><span class="s1">&#39;lock.b&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">hset</span><span class="p">(</span><span class="s1">&#39;lock.c&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">})</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mhkeyget</span><span class="p">(</span><span class="s1">&#39;lock.*&#39;</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="go">{&#39;lock.a&#39;: &#39;1&#39;, &#39;lock.c&#39;: &#39;3&#39;, &#39;lock.b&#39;: &#39;2&#39;}</span>
+
+<span class="go"># cleanup</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#r.delete(&#39;lock.a&#39;, &#39;lock.b&#39;, &#39;lock.c&#39;)</span>
+<span class="go">True</span>
+</pre></div>
 </div>
-<div class="section" id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dkredis.dkredis.pop_pyval">
+<span class="sig-prename descclassname"><span class="pre">dkredis.dkredis.</span></span><span class="sig-name descname"><span class="pre">pop_pyval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/dkredis.html#pop_pyval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.dkredis.pop_pyval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get value and remove key.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dkredis.dkredis.set_dict">
+<span class="sig-prename descclassname"><span class="pre">dkredis.dkredis.</span></span><span class="sig-name descname"><span class="pre">set_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dictval</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/dkredis.html#set_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.dkredis.set_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>All values in <cite>dictval</cite> should be strings. They’ll be read back
+as strings – use <cite>py_setval</cite> to set dicts with any values.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dkredis.dkredis.set_pyval">
+<span class="sig-prename descclassname"><span class="pre">dkredis.dkredis.</span></span><span class="sig-name descname"><span class="pre">set_pyval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/dkredis.html#set_pyval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.dkredis.set_pyval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store any (picleable) value in Redis.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dkredis.dkredis.setmax">
+<span class="sig-prename descclassname"><span class="pre">dkredis.dkredis.</span></span><span class="sig-name descname"><span class="pre">setmax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/dkredis.html#setmax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.dkredis.setmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update key with the max of the current value and <cite>val</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">:=</span> <span class="nb">max</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">val</span><span class="p">)</span>
+</pre></div>
 </div>
+<p>returns the maximum value.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dkredis.dkredis.setmin">
+<span class="sig-prename descclassname"><span class="pre">dkredis.dkredis.</span></span><span class="sig-name descname"><span class="pre">setmin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/dkredis.html#setmin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.dkredis.setmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update key with the max of the current value and <cite>val</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">:=</span> <span class="nb">min</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">val</span><span class="p">)</span>
+</pre></div>
 </div>
+<p>returns the maximum value.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dkredis.dkredis.update">
+<span class="sig-prename descclassname"><span class="pre">dkredis.dkredis.</span></span><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/dkredis.html#update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.dkredis.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Usage</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">update</span><span class="p">(</span><span class="n">KEY</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">val</span><span class="p">:</span> <span class="n">val</span> <span class="o">+</span> <span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-dkredis.dkredislocks">
+<span id="dkredis-dkredislocks-module"></span><h2>dkredis.dkredislocks module<a class="headerlink" href="#module-dkredis.dkredislocks" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="dkredis.dkredislocks.fetch_lock">
+<span class="sig-prename descclassname"><span class="pre">dkredis.dkredislocks.</span></span><span class="sig-name descname"><span class="pre">fetch_lock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">apiname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/dkredislocks.html#fetch_lock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.dkredislocks.fetch_lock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this lock to ensure that only one process is fetching
+expired cached data from an external api.</p>
+<p>It is important to have a timeout on the lock, so it will be released
+even if the process crashes.</p>
+<p>A process that doesn’t get the lock should not wait for the lock, but
+should wait and try using the cached data instead.</p>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_weather_data</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;weatherdata&#39;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">cache</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">fetch_lock</span><span class="p">(</span><span class="s1">&#39;weatherapi&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">should_fetch</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">should_fetch</span><span class="p">:</span>
+                <span class="n">weatherdata</span> <span class="o">=</span> <span class="n">fetch_weather_data</span><span class="p">()</span>
+                <span class="n">cache</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s1">&#39;weatherdata&#39;</span><span class="p">,</span> <span class="n">weatherdata</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">weatherdata</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># another process is fetching data, wait for it</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">cache</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s1">&#39;weatherdata&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dkredis.dkredislocks.mutex">
+<span class="sig-prename descclassname"><span class="pre">dkredis.dkredislocks.</span></span><span class="sig-name descname"><span class="pre">mutex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seconds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unlock</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">waitsecs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/dkredislocks.html#mutex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.dkredislocks.mutex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lock the <code class="docutils literal notranslate"><span class="pre">name</span></code> for <code class="docutils literal notranslate"><span class="pre">seconds</span></code>, waiting <code class="docutils literal notranslate"><span class="pre">waitsecs</span></code> seconds
+between each attempt at locking the name.  Locking means creating
+a key ‘dkredis:mutex:’ + key.</p>
+<p>It will raise a Timeout exception if more than <code class="docutils literal notranslate"><span class="pre">timeout</span></code> seconds
+has elapsed.</p>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dkredis</span> <span class="kn">import</span> <span class="n">dkredis</span>
+
+<span class="k">with</span> <span class="n">dkredis</span><span class="o">.</span><span class="n">lock</span><span class="p">(</span><span class="s1">&#39;mymutex&#39;</span><span class="p">):</span>
+    <span class="c1"># mutual exclusion zone ;-)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dkredis.dkredislocks.rate_limiting_lock">
+<span class="sig-prename descclassname"><span class="pre">dkredis.dkredislocks.</span></span><span class="sig-name descname"><span class="pre">rate_limiting_lock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seconds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/dkredislocks.html#rate_limiting_lock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.dkredislocks.rate_limiting_lock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lock all the keys and keep them locked for <code class="docutils literal notranslate"><span class="pre">seconds</span></code> seconds.
+Useful e.g. to prevent sending email to the same domain more often
+than every 15 seconds.</p>
+<dl class="simple">
+<dt>XXX: Currently doesn’t recover from crashed clients (can be done as</dt><dd><p>an else: clause to the if r.msetnx(), similarly to the mutex
+function (below).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-dkredis.rediscache">
+<span id="dkredis-rediscache-module"></span><h2>dkredis.rediscache module<a class="headerlink" href="#module-dkredis.rediscache" title="Permalink to this heading">¶</a></h2>
+<p>Object cache implementation using redis as a backend.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="dkredis.rediscache.Cached">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dkredis.rediscache.</span></span><span class="sig-name descname"><span class="pre">Cached</span></span><a class="reference internal" href="_modules/dkredis/rediscache.html#Cached"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.rediscache.Cached" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Mixin class to invalidate cache keys on model.save().</p>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyModel</span><span class="p">(</span><span class="n">Cached</span><span class="p">,</span> <span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>   <span class="c1"># models.Model must be last</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cache_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>(that’s it.  All cache keys will be removed whenever <cite>MyModel.save()</cite> is
+called).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dkredis.rediscache.Cached.cache_keys">
+<span class="sig-name descname"><span class="pre">cache_keys</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#dkredis.rediscache.Cached.cache_keys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dkredis.rediscache.Cached.get_cache_values">
+<span class="sig-name descname"><span class="pre">get_cache_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/rediscache.html#Cached.get_cache_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.rediscache.Cached.get_cache_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all cached values for this object.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>returns None both for keys that are None and
+non-existant keys!</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dkredis.rediscache.Cached.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/rediscache.html#Cached.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.rediscache.Cached.save" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dkredis.rediscache.cache">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dkredis.rediscache.</span></span><span class="sig-name descname"><span class="pre">cache</span></span><a class="reference internal" href="_modules/dkredis/rediscache.html#cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.rediscache.cache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Usage:</p>
+<p>from dkredis.rediscache import cache</p>
+<dl>
+<dt>try:</dt><dd><p>v = cache.get(key)</p>
+</dd>
+<dt>except cache.DoesNotExist:</dt><dd><blockquote>
+<div><p>v = mk_object_value(…)
+cache.put(</p>
+<blockquote>
+<div><p>key, v,
+duration=secs)  # or datetime.duration()</p>
+</div></blockquote>
+</div></blockquote>
+<p>you can use a datetime value for the valid_until parameter,
+or anything the timeperiod.when() function accepts.</p>
+</dd>
+</dl>
+<dl class="py exception">
+<dt class="sig sig-object py" id="dkredis.rediscache.cache.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="reference internal" href="_modules/dkredis/rediscache.html#cache.DoesNotExist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.rediscache.cache.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<p>Value not in cache (possibly due to expiration).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dkredis.rediscache.cache.get">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/rediscache.html#cache.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.rediscache.cache.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch value for <code class="docutils literal notranslate"><span class="pre">key</span></code> from redis.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dkredis.rediscache.cache.get_value">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/rediscache.html#cache.get_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.rediscache.cache.get_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dkredis.rediscache.cache.ping">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ping</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/rediscache.html#cache.ping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.rediscache.cache.ping" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dkredis.rediscache.cache.put">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/rediscache.html#cache.put"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.rediscache.cache.put" title="Permalink to this definition">¶</a></dt>
+<dd><p>Put <code class="docutils literal notranslate"><span class="pre">value</span></code> in cache, under <code class="docutils literal notranslate"><span class="pre">key</span></code>, for <code class="docutils literal notranslate"><span class="pre">duration</span></code> seconds.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dkredis.rediscache.cache.rediskey">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rediskey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/rediscache.html#cache.rediskey"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.rediscache.cache.rediskey" title="Permalink to this definition">¶</a></dt>
+<dd><p>The redis key is obj-cache. + the md5 hexdigest of its serialization.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dkredis.rediscache.cache.remove">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">remove</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/rediscache.html#cache.remove"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.rediscache.cache.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove key from cache.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dkredis.rediscache.cached">
+<span class="sig-prename descclassname"><span class="pre">dkredis.rediscache.</span></span><span class="sig-name descname"><span class="pre">cached</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3600</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/rediscache.html#cached"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.rediscache.cached" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function result cache decorator.</p>
+<p>Usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@cached</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">can_view_user</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
+    <span class="o">...</span>
+    <span class="k">return</span> <span class="kc">True</span>   <span class="c1"># will be cached for 1hr (3600 secs)</span>
+
+<span class="k">class</span> <span class="nc">MenuItem</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nd">@classmethod</span>
+    <span class="nd">@cached</span><span class="p">(</span><span class="s1">&#39;menu_root&#39;</span><span class="p">,</span> <span class="mi">3600</span><span class="o">*</span><span class="mi">24</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">get_root</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">MenuItem</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nd">@cached</span><span class="p">(</span><span class="k">lambda</span> <span class="n">u</span><span class="p">:</span> <span class="s1">&#39;user_privileges_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">u</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="mi">3600</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_user_privileges</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
+    <span class="c1">#...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dkredis.rediscache.djangocache">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dkredis.rediscache.</span></span><span class="sig-name descname"><span class="pre">djangocache</span></span><a class="reference internal" href="_modules/dkredis/rediscache.html#djangocache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.rediscache.djangocache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Django facade to the rediscache.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="dkredis.rediscache.djangocache.get">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/rediscache.html#djangocache.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.rediscache.djangocache.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dkredis.rediscache.djangocache.set">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/rediscache.html#djangocache.set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.rediscache.djangocache.set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dkredis.rediscache.writeln">
+<span class="sig-prename descclassname"><span class="pre">dkredis.rediscache.</span></span><span class="sig-name descname"><span class="pre">writeln</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/rediscache.html#writeln"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.rediscache.writeln" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-dkredis.utils">
+<span id="dkredis-utils-module"></span><h2>dkredis.utils module<a class="headerlink" href="#module-dkredis.utils" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="dkredis.utils.convert_to_bytes">
+<span class="sig-prename descclassname"><span class="pre">dkredis.utils.</span></span><span class="sig-name descname"><span class="pre">convert_to_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/utils.html#convert_to_bytes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.utils.convert_to_bytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the input object to bytes.</p>
+<dl>
+<dt>Parameters:</dt><dd><p>r (object): The input object to convert.</p>
+</dd>
+<dt>Returns:</dt><dd><dl>
+<dt>bytes: The converted object as bytes. If the input object is</dt><dd><p>already of type ‘bytes’, it is returned as is.</p>
+<p>If the input object is of type ‘str’, it is encoded to
+bytes using the ‘utf-8’ encoding.</p>
+<p>For any other input object, it is converted to a string
+and then encoded to bytes using the ‘utf-8’ encoding.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dkredis.utils.is_valid_identifier">
+<span class="sig-prename descclassname"><span class="pre">dkredis.utils.</span></span><span class="sig-name descname"><span class="pre">is_valid_identifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="_modules/dkredis/utils.html#is_valid_identifier"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.utils.is_valid_identifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if s is a valid python identifier.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dkredis.utils.later">
+<span class="sig-prename descclassname"><span class="pre">dkredis.utils.</span></span><span class="sig-name descname"><span class="pre">later</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/utils.html#later"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.utils.later" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return timestamp <code class="docutils literal notranslate"><span class="pre">n</span></code> seconds from now.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dkredis.utils.now">
+<span class="sig-prename descclassname"><span class="pre">dkredis.utils.</span></span><span class="sig-name descname"><span class="pre">now</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/utils.html#now"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.utils.now" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return timestamp.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="dkredis.utils.unique_id">
+<span class="sig-prename descclassname"><span class="pre">dkredis.utils.</span></span><span class="sig-name descname"><span class="pre">unique_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fast</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dkredis/utils.html#unique_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dkredis.utils.unique_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a unique id.</p>
+</dd></dl>
+
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">dkredis package</a><ul>
+<li><a class="reference internal" href="#module-dkredis">Module contents</a></li>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#dkredis-dkredis-module">dkredis.dkredis module</a></li>
-<li><a class="reference internal" href="#module-contents">Module contents</a></li>
+<li><a class="reference internal" href="#module-dkredis.dkredis">dkredis.dkredis module</a><ul>
+<li><a class="reference internal" href="#dkredis.dkredis.Timeout"><code class="docutils literal notranslate"><span class="pre">Timeout</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.dkredis.connect"><code class="docutils literal notranslate"><span class="pre">connect()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.dkredis.get_dict"><code class="docutils literal notranslate"><span class="pre">get_dict()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.dkredis.get_pyval"><code class="docutils literal notranslate"><span class="pre">get_pyval()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.dkredis.mhkeyget"><code class="docutils literal notranslate"><span class="pre">mhkeyget()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.dkredis.pop_pyval"><code class="docutils literal notranslate"><span class="pre">pop_pyval()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.dkredis.set_dict"><code class="docutils literal notranslate"><span class="pre">set_dict()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.dkredis.set_pyval"><code class="docutils literal notranslate"><span class="pre">set_pyval()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.dkredis.setmax"><code class="docutils literal notranslate"><span class="pre">setmax()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.dkredis.setmin"><code class="docutils literal notranslate"><span class="pre">setmin()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.dkredis.update"><code class="docutils literal notranslate"><span class="pre">update()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-dkredis.dkredislocks">dkredis.dkredislocks module</a><ul>
+<li><a class="reference internal" href="#dkredis.dkredislocks.fetch_lock"><code class="docutils literal notranslate"><span class="pre">fetch_lock()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.dkredislocks.mutex"><code class="docutils literal notranslate"><span class="pre">mutex()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.dkredislocks.rate_limiting_lock"><code class="docutils literal notranslate"><span class="pre">rate_limiting_lock()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-dkredis.rediscache">dkredis.rediscache module</a><ul>
+<li><a class="reference internal" href="#dkredis.rediscache.Cached"><code class="docutils literal notranslate"><span class="pre">Cached</span></code></a><ul>
+<li><a class="reference internal" href="#dkredis.rediscache.Cached.cache_keys"><code class="docutils literal notranslate"><span class="pre">Cached.cache_keys</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.rediscache.Cached.get_cache_values"><code class="docutils literal notranslate"><span class="pre">Cached.get_cache_values()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.rediscache.Cached.save"><code class="docutils literal notranslate"><span class="pre">Cached.save()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dkredis.rediscache.cache"><code class="docutils literal notranslate"><span class="pre">cache</span></code></a><ul>
+<li><a class="reference internal" href="#dkredis.rediscache.cache.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">cache.DoesNotExist</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.rediscache.cache.get"><code class="docutils literal notranslate"><span class="pre">cache.get()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.rediscache.cache.get_value"><code class="docutils literal notranslate"><span class="pre">cache.get_value()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.rediscache.cache.ping"><code class="docutils literal notranslate"><span class="pre">cache.ping()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.rediscache.cache.put"><code class="docutils literal notranslate"><span class="pre">cache.put()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.rediscache.cache.rediskey"><code class="docutils literal notranslate"><span class="pre">cache.rediskey()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.rediscache.cache.remove"><code class="docutils literal notranslate"><span class="pre">cache.remove()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dkredis.rediscache.cached"><code class="docutils literal notranslate"><span class="pre">cached()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.rediscache.djangocache"><code class="docutils literal notranslate"><span class="pre">djangocache</span></code></a><ul>
+<li><a class="reference internal" href="#dkredis.rediscache.djangocache.get"><code class="docutils literal notranslate"><span class="pre">djangocache.get()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.rediscache.djangocache.set"><code class="docutils literal notranslate"><span class="pre">djangocache.set()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dkredis.rediscache.writeln"><code class="docutils literal notranslate"><span class="pre">writeln()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-dkredis.utils">dkredis.utils module</a><ul>
+<li><a class="reference internal" href="#dkredis.utils.convert_to_bytes"><code class="docutils literal notranslate"><span class="pre">convert_to_bytes()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.utils.is_valid_identifier"><code class="docutils literal notranslate"><span class="pre">is_valid_identifier()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.utils.later"><code class="docutils literal notranslate"><span class="pre">later()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.utils.now"><code class="docutils literal notranslate"><span class="pre">now()</span></code></a></li>
+<li><a class="reference internal" href="#dkredis.utils.unique_id"><code class="docutils literal notranslate"><span class="pre">unique_id()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">dkredis - Python interface to Redis</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="index.html"
+                          title="previous chapter">dkredis - Python interface to Redis</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -75,17 +504,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -97,14 +524,18 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="index.html" title="dkredis - Python interface to Redis"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">dkredis 0.0.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">dkredis 0.1.9 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">dkredis package</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 Bjorn Pettersen.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.1.
+    &#169; Copyright 2014 Bjorn Pettersen.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
     </div>
   </body>
 </html>

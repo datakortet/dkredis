@@ -4,6 +4,8 @@ import os
 import dkredis
 import pytest
 
+import dkredis.utils
+
 
 @pytest.fixture
 def cn():
@@ -11,32 +13,32 @@ def cn():
 
 
 def test_now_later():
-    assert dkredis.now() < dkredis.later(5)
+    assert dkredis.utils.now() < dkredis.utils.later(5)
 
 
 def test_convert_to_bytes():
     # Test when input is already bytes
     bytes_input = b'test bytes'
-    assert dkredis.convert_to_bytes(bytes_input) == bytes_input
+    assert dkredis.utils.convert_to_bytes(bytes_input) == bytes_input
 
     # Test when input is a string
     str_input = 'test string'
-    assert dkredis.convert_to_bytes(str_input) == str_input.encode('utf-8')
+    assert dkredis.utils.convert_to_bytes(str_input) == str_input.encode('utf-8')
 
     # Test when input is an int
     int_input = 123
-    assert dkredis.convert_to_bytes(int_input) == str(int_input).encode('utf-8')
+    assert dkredis.utils.convert_to_bytes(int_input) == str(int_input).encode('utf-8')
 
     # Test when input is a complex object e.g. a dictionary
     dict_input = {'key': 'value'}
-    assert dkredis.convert_to_bytes(dict_input) == str(dict_input).encode('utf-8')
+    assert dkredis.utils.convert_to_bytes(dict_input) == str(dict_input).encode('utf-8')
 
 
 def test_unique_id_is_unique():
-    ids = {dkredis.unique_id(fast=True) for _ in range(1000)}
+    ids = {dkredis.utils.unique_id(fast=True) for _ in range(1000)}
     assert len(ids) == 1000
 
-    ids = {dkredis.unique_id(fast=False) for _ in range(1000)}
+    ids = {dkredis.utils.unique_id(fast=False) for _ in range(1000)}
     assert len(ids) == 1000
 
 
