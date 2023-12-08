@@ -3,6 +3,8 @@
 .md5
 *~
 \#*\#
+/pytest.exit
+
 
 # no .svg at root
 /*.svg
@@ -400,4 +402,3 @@ pyvenv.cfg
 pip-selfcheck.json
 
 # End of https://www.gitignore.io/api/node,less,sass,venv,python,django,pycharm
-

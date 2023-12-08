@@ -100,7 +100,8 @@ class cache:
         # writeln("....cache:put:setex(%r, %r, %r) for %r" % (
         #     k, _duration, v, key
         # ))
-        log.debug("....cache:put:setex(%r, %r, %r) for %r", k, _duration, v, key)
+        log.debug("....cache:put:setex(%r, %r, %r) for %r",
+                  k, _duration, v, key)
         r.set(k, v, ex=_duration)
 
     @classmethod
