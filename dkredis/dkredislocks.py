@@ -96,6 +96,49 @@ def rate_limiting_lock(resources, seconds=30, cn=None):
     return False
 
 
+
+# def rate_limit_api_call(apiname: str, maxping: int = 30, cn=None):
+#     """
+#        Usage::
+
+#             def get_weather_data():
+#                 lock = rate_limit_api_call('weatherapi')
+#                 if next(lock):
+#                     weatherdata = fetch_weather_data()
+#                     lock.send(weatherdata)
+#                 else:
+#                     # another process is fetching data, wait for it
+#                     time.sleep(1)
+#                 return cache.get_value('weatherdata', default=None)
+
+
+#     """
+#     r = cn or connect()
+#     # Use redis lock to ensure the function is not concurrently
+#     # accessed by multiple processes
+#     lockname = f'dkredis:apilock:{apiname}'
+#     last_called_key = f'dkredis:apilock:lastcalled:{apiname}'
+
+#     with r.lock(lockname, blocking_timeout=10):
+#         # Retrieve the timestamp of the last API call if it exists
+#         last_called_timestamp = r.get(last_called_key)
+#         if last_called_timestamp is None or time.time() - float(last_called_timestamp) > maxping:
+#             # We are allowed to call the API
+#             result = yield True
+#             # Cache the result and the current timestamp
+#             r.set(apiname, result)
+#             r.set(last_called_key, time.time())
+#         else:
+#             # Not enough time has passed; retrieve cached result
+#             result = r.get(apiname)
+#             if result is None:
+#                 # No cached result, call the API anyways
+#                 result = yield True
+#                 r.set(apiname, result)
+#                 r.set(last_called_key, time.time())
+#         return result
+
+
 # XXX: [bp-2023-12-17] No idea what this is supposed to be used for, but it is
 #      definitely not a mutex implementation...
 @contextmanager
