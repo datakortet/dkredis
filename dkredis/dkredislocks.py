@@ -8,7 +8,7 @@ from .utils import (
     later,
     now,
 )
-from .dkredis import connect, Timeout
+from .dkredis import connect, Timeout, remove_if
 
 
 @contextmanager
@@ -61,14 +61,7 @@ def fetch_lock(apiname: str, timeout=5, cn=None):
             # need to check that we still have the lock before deleting it.
             # The get + del needs to be atomic, so we have to use a lua script.
             # See https://redis.io/commands/eval
-            script = """
-                if redis.call("get", KEYS[1]) == ARGV[1] then
-                    return redis.call("del", KEYS[1])
-                else
-                    return 0
-                end
-            """
-            r.eval(script, 1, key, uniq)
+            remove_if(key, uniq, cn=r)
             return
     else:
         # Lock is already held by another process

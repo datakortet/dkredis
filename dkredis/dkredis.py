@@ -266,6 +266,28 @@ def pop_pyval(key, cn=None):
     return val
 
 
+def remove(key, cn=None):
+    """Remove a key from redis.
+    """
+    r = cn or connect()
+    r.delete(key)
+
+
+def remove_if(key, val, cn=None):
+    """Atomically remove key if it has the value `val`.
+    """
+    r = cn or connect()
+
+    lua_script = """
+        if redis.call('GET', KEYS[1]) == ARGV[1] then
+            return redis.call('DEL', KEYS[1])
+        else
+            return 0
+        end
+    """
+    return r.eval(lua_script, 1, key, val)
+
+
 def set_dict(key, dictval, secs=None, cn=None):
     """All values in `dictval` should be strings. They'll be read back
        as strings -- use `py_setval` to set dicts with any values.
