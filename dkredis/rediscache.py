@@ -89,7 +89,8 @@ class cache:
             _duration = duration.days * 24 * 60 * 60 + duration.seconds
         else:
             _duration = int(duration)  # try int conversion, throws ValueError
-        assert _duration >= 1  # smallest cache duration is +1 second
+        if _duration < 1:
+            raise ValueError("cache duration must be >= 1 second, got %r" % _duration)
 
         # no need to remove an existing key...
         # cls.remove(key)
