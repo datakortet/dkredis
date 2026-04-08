@@ -20,7 +20,7 @@ jobs:
         run: |
           mkdir -p $PIP_CACHE_DIR
           mkdir -p $LINTDIR
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       - name: setup directories
@@ -45,7 +45,7 @@ jobs:
       - run: sphinx-build -W -n -T -b man docs build/sphinx/man
 
       - name: Upload docs as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Docs
           path: build/sphinx/
@@ -78,11 +78,11 @@ jobs:
       - name: setup global directories
         shell: bash
         run: mkdir -p $PIP_CACHE_DIR
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
 
-      - uses: supercharge/redis-github-action@1.4.0
+      - uses: supercharge/redis-github-action@1.8.0
         with:
           redis-version: 6
 
@@ -91,7 +91,7 @@ jobs:
       - run: pytest -vv --cov=dkredis tests
 
       - name: Upload coverage to codecov.io
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN}}
           fail_ci_if_error: false
@@ -106,7 +106,7 @@ jobs:
       - name: setup directories
         shell: bash
         run: mkdir -p $PIP_CACHE_DIR
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
@@ -119,7 +119,7 @@ jobs:
       - run: python -m build
 
       - name: Upload packages as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Packages
           path: dist/
