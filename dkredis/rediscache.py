@@ -8,7 +8,7 @@ import logging
 
 log = logging.getLogger(__name__)
 
-PICLE_PROTOCOL = 1
+PICKLE_PROTOCOL = 1
 REDIS_CACHE_DEBUG = False
 
 if REDIS_CACHE_DEBUG:
@@ -22,7 +22,7 @@ else:
 def _cache_serialize(val):
     """Serialize a python value to go into the cache.
     """
-    return pickle.dumps(val, protocol=PICLE_PROTOCOL)
+    return pickle.dumps(val, protocol=PICKLE_PROTOCOL)
 
 
 def _cache_unserialize(val):

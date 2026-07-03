@@ -23,7 +23,7 @@ import pickle
 
 import redis as _redis
 
-PICLE_PROTOCOL = 1
+PICKLE_PROTOCOL = 1
 
 
 class Timeout(Exception):  # pragma: nocover
@@ -190,7 +190,7 @@ def update(key, fn, cn=None):
     """
     r = cn or connect()
     with r.pipeline() as p:
-        while 1:
+        while True:
             try:
                 p.watch(key)  # --> immediate mode
                 val = p.get(key)
@@ -202,7 +202,7 @@ def update(key, fn, cn=None):
             except _redis.WatchError:  # pragma: nocover
                 pass  # someone else got there before us, retry.
     if isinstance(newval, bytes):
-        newval = newval.decode('u8')
+        newval = newval.decode('utf-8')
     return newval
 
 
@@ -214,7 +214,7 @@ def setmax(key, val, cn=None):
        returns the maximum value.
     """
     if isinstance(val, str):
-        val = val.encode('u8')
+        val = val.encode('utf-8')
     return update(key, lambda v: max(v, val), cn=cn)
 
 
@@ -226,7 +226,7 @@ def setmin(key, val, cn=None):
        returns the maximum value.
     """
     if isinstance(val, str):
-        val = val.encode('u8')
+        val = val.encode('utf-8')
     return update(key, lambda v: min(v, val), cn=cn)
 
 
@@ -234,7 +234,7 @@ def set_pyval(key, val, secs=None, cn=None):
     """Store any (picleable) value in Redis.
     """
     r = cn or connect()
-    pval = pickle.dumps(val, protocol=PICLE_PROTOCOL)
+    pval = pickle.dumps(val, protocol=PICKLE_PROTOCOL)
     if secs is None:
         r.set(key, pval)
     else:
@@ -305,7 +305,7 @@ def get_dict(key, cn=None):
     res = {}
     for fieldname in r.hkeys(key):
         res[fieldname] = r.hget(key, fieldname)
-    return {k.decode('u8'): v.decode('u8') for k, v in res.items()}
+    return {k.decode('utf-8'): v.decode('utf-8') for k, v in res.items()}
 
 
 def mhkeyget(keypattern, field, cn=None):
@@ -335,4 +335,4 @@ def mhkeyget(keypattern, field, cn=None):
     for h in hashes:
         result[h] = r.hget(h, field)
     # XXX: redis always returns bytes, and we want unicode
-    return {k.decode('u8'): v.decode('u8') for k, v in result.items()}
+    return {k.decode('utf-8'): v.decode('utf-8') for k, v in result.items()}

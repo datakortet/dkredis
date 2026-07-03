@@ -128,7 +128,7 @@ def mutex(name, seconds: int = 30, timeout: int = 60,
     expire = start
 
     try:
-        while 1:
+        while True:
             if start + timeout < now():
                 raise Timeout()
 
