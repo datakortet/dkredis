@@ -31,7 +31,6 @@
         <list>
           <option value="unittest.TestCase" />
           <option value="unittest.case.TestCase" />
-          <option value="qmlib.qmwise.QMWISe" />
         </list>
       </option>
     </inspection_tool>
