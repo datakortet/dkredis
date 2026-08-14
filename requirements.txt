@@ -1,7 +1,6 @@
-redis==5.0.1
-pytest==6.1.2                  ; python_version < '3.9'
-pytest==7.2.1                  ; python_version >= '3.9'
-pytest-cov==2.12.1             ; python_version < '3.9'
-pytest-cov==4.0.0              ; python_version >= '3.9'
-pytest-xdist==2.2.1
+pytest==8.0.0
+pytest-cov==4.1.0
+pytest-xdist==3.5.0
+redis==5.0.1                   ; python_version < '3.12'
+redis==8.1.0                   ; python_version >= '3.12'
 

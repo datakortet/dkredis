@@ -22,7 +22,8 @@ setuptools.setup(
     version=version,
     url='https://github.com/datakortet/dkredis',
     install_requires=[
-        'redis==5.0.1',
+        'redis==5.0.1; python_version < "3.12"',
+        'redis==8.1.0; python_version >= "3.12"',
     ],
     description=__doc__.strip(),
     classifiers=[line for line in classifiers.split('\n') if line],
