@@ -51,13 +51,25 @@ jobs:
           path: build/sphinx/
 
   ci-test:
-    name: CI:Test
+    name: CI:Test (py${{ matrix.python-version }}, redis ${{ matrix.redis-version }})
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
 
         # current matrix
         python-version: ['3.10', '3.11', '3.12', '3.13', '3.14']
+
+        # redis server versions we must stay compatible with:
+        #   4 - WSL dev box (4.0.9)
+        #   5 - fischer (5.0.7)
+        #   6 - ubuntu 22.04 (6.0.x), first version with HELLO/RESP3
+        #   7 - ubuntu 24.04 (7.0.x)
+        #   8 - latest
+        # requirements.txt pins redis-py 5.0.1 (py<3.12) and 8.1.0
+        # (py>=3.12), so the full product also covers both client
+        # versions against every server version.
+        redis-version: [4, 5, 6, 7, 8]
 
         os: [ubuntu-latest]
 
@@ -84,7 +96,7 @@ jobs:
 
       - uses: supercharge/redis-github-action@1.8.0
         with:
-          redis-version: 6
+          redis-version: ${{ matrix.redis-version }}
 
       - run: pip install -r requirements.txt
       - run: pip list
