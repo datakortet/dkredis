@@ -137,7 +137,10 @@ def connect(host=None, port=6379, db=0, password=None):
         host = os.environ.get('REDIS_HOST', 'localhost')
     if password is None:
         password = os.environ.get('REDIS_PASSWORD')
-    return _redis.StrictRedis(host=host, port=port, db=db, password=password)
+    # protocol=2: redis-py 8 defaults to RESP3 and opens every connection
+    # with HELLO, which is a redis 6.0 command.  Our servers are older.
+    return _redis.StrictRedis(host=host, port=port, db=db, password=password,
+                              protocol=2)
 
 
 # def update_binop(binaryfn):
