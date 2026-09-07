@@ -61,8 +61,10 @@ def fetch_lock(apiname: str, timeout=5, cn=None):
             # need to check that we still have the lock before deleting it.
             # The get + del needs to be atomic, so we have to use a lua script.
             # See https://redis.io/commands/eval
+            #
+            # NB: don't `return` here -- a return inside a finally swallows
+            # any exception raised inside the with-block.
             remove_if(key, uniq, cn=r)
-            return
     else:
         # Lock is already held by another process
         yield False    # the client should not do the fetch
